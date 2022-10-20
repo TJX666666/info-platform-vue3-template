@@ -14,19 +14,22 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const isLogin: boolean = to.meta.isLogin ? true : false;
-    const token: boolean = localStorage.getItem('token') ? true : false;
 
-    if (isLogin && !token) {
-        next({
-            path: "/login",
-            query: {
-                redirect: to.path
-            },
-        });
-    } else {
-        next();
-    }
+//限制某些页面在没有登录或者storage中没有存储token情况下无法访问，重定向到登陆页面
+    // const isLogin: boolean = to.meta.isLogin ? true : false;
+    // const token: boolean = localStorage.getItem('token') ? true : false;
+
+    // if (isLogin && !token) {
+    //     next({
+    //         path: "/login",
+    //         query: {
+    //             redirect: to.path
+    //         },
+    //     });
+    // } else {
+    //     next();
+    // }
+    next()
 });
 
 export function setupRouter(app: App<Element>) {

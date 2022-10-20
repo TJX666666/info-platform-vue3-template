@@ -6,49 +6,51 @@ const defHttp = axios.create({
     timeout: 3000,
 })
 
-// interceptors axios的拦截器对象
-defHttp.interceptors.request.use(config => {
+// interceptors axios的请求拦截器对象
+// defHttp.interceptors.request.use(config => {
 
-    const token: string = localStorage.getItem('token') as string;
-    if (token) {
-        config.headers = {
-            "token": token
-        }
-    }
+//     const token: string = localStorage.getItem('token') as string;
+//     if (token) {
+//         config.headers = {
+//             "token": token
+//         }
+//     }
 
-    if (config.method === 'post') {
-        config.headers = {
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
-    }
+//     if (config.method === 'post') {
+//         config.headers = {
+//             "Content-Type": "application/x-www-form-urlencoded"
+//         }
+//     }
 
-    return config
-}, err => {
-    Promise.reject(err)
-})
+//     return config
+// }, err => {
+//     Promise.reject(err)
+// })
 
-defHttp.interceptors.response.use(res => {
 
-    if (res.status === 200) {
+// interceptors axios的响应拦截器对象
+// defHttp.interceptors.response.use(res => {
 
-        const { code, data } = res.data;
+//     if (res.status === 200) {
 
-        if (code === 200) {
-            return res.data;
-        } else if (code === 401) {
+//         const { code, data } = res.data;
+
+//         if (code === 200) {
+//             return res.data;
+//         } else if (code === 401) {
             
-            return router.push({
-                path: '/login'
-            })
-        } else {
+//             return router.push({
+//                 path: '/login'
+//             })
+//         } else {
             
-        }
+//         }
 
-        return false;
-    }
+//         return false;
+//     }
 
-}, err => {
-    Promise.reject(err)
-})
+// }, err => {
+//     Promise.reject(err)
+// })
 
 export default defHttp
