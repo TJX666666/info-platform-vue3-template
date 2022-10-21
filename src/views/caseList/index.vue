@@ -41,8 +41,22 @@
         </div>
       </el-card>
     </div>
-
-    <div class="list-box"></div>
+    <!-- 分页块 -->
+    <div class="page-box">
+      <div class="example-pagination-block">
+        <el-pagination
+          layout="total, sizes, prev, pager, next"
+          :hide-on-single-page="value"
+          :total="pageTotal"
+          :current-page="currentPage"
+          :page-size="pageSize"
+          :page-sizes="[10, 20, 30, 50]"
+          :pager-count="5"
+          @current-change="handleCurrentChange"
+          @size-change="handleSizeChange"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -50,6 +64,9 @@
 import { typeList1, typeList2 } from "./data";
 import { getImages } from "@/http/api";
 const curId = ref(0);
+onMounted(() => {
+  listData();
+});
 const clickActive = (i) => {
   curId.value = i;
 };
@@ -59,16 +76,30 @@ const clickActive2 = (i) => {
 };
 
 const listBox = ref([]);
-onMounted(() => {
+
+//处理分页
+const pageTotal = ref(0);
+const value = ref(false);
+const currentPage = ref(1);
+const pageSize = ref(10);
+const handleCurrentChange = (val) => {
+  currentPage.value = val;
+  listData();
+};
+const handleSizeChange = (val) => {
+  pageSize.value = val;
+};
+const listData = () => {
   let pageObj = {
-    page: 0,
-    size: 20,
+    page: currentPage.value,
+    size: pageSize.value,
   };
   getImages(pageObj).then((res) => {
     console.log(res);
     listBox.value = res.data.result.list;
+    pageTotal.value = res.data.result.total;
   });
-});
+};
 </script>
 
 <style lang="scss" scoped>
@@ -122,6 +153,26 @@ onMounted(() => {
     margin: 20px auto;
     .el-card {
       margin: 0px 0 20px;
+      .image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+      ::v-deep .el-card__body {
+        display: flex;
+      }
+    }
+  }
+  .page-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    .example-pagination-block + .example-pagination-block {
+      margin-top: 10px;
+    }
+    .example-pagination-block .example-demonstration {
+      margin-bottom: 16px;
     }
   }
 }
