@@ -1,7 +1,7 @@
 export const basicRoutes: Array<any> = [
     {
-        path: "/",
-        name: "Root",
+        path: "/home",
+        name: "Home",
         meta: {
             title: "首页",
             keepAlive: true,

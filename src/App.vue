@@ -1,5 +1,5 @@
 <template>
-  <header-component></header-component>
+  <header-component />
   <router-view v-slot="{ Component, route }">
     <keep-alive>
       <component
@@ -16,6 +16,7 @@
       v-if="!route.meta.keepAlive"
     />
   </router-view>
+  <bottom-component />
 </template>
 
 <script setup lang="ts">

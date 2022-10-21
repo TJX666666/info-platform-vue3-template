@@ -27,7 +27,7 @@
 import * as dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import { useUserStore } from "@/store/modules/user";
-import { sessionTimeoutApi, getImages } from "@/http/api/index";
+import { infoTxt, getImages } from "@/http/api/index";
 
 dayjs.extend(isSameOrAfter);
 
@@ -70,7 +70,7 @@ onMounted(async () => {
 onActivated(() => {});
 
 const getData = () => {
-  sessionTimeoutApi({
+  infoTxt({
     name: "qwe",
   }).then((res) => {
     if (res) {

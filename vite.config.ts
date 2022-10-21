@@ -1,8 +1,11 @@
 import { defineConfig, loadEnv } from "vite";
 import { createHtmlPlugin } from 'vite-plugin-html'
 import viteCompression from 'vite-plugin-compression';
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vue from "@vitejs/plugin-vue";
 import path from 'path'
 
@@ -37,10 +40,19 @@ export default defineConfig({
     },
     plugins: [
         vue(),
+        Icons({
+            autoInstall: true,
+         }),
         //  hooks 自动引入
         AutoImport({
             imports: ['vue', 'vue-router', 'vuex', '@vueuse/head'],
-            dts: 'src/auto-import.d.ts'
+            dts: 'src/auto-import.d.ts',
+            resolvers: [
+                ElementPlusResolver(), // 自动导入图标组件
+                IconsResolver({
+                    prefix: 'Icon',
+                }),
+            ],
         }),
         // 对 index.html 注入动态数据
         createHtmlPlugin({
@@ -63,11 +75,18 @@ export default defineConfig({
             // ui库解析器，也可以自定义，需要安装相关UI库
             resolvers: [
                 // VantResolver(),
-                // ElementPlusResolver(),
+                ElementPlusResolver(),
+                // 自动注册图标组件
+                IconsResolver({
+                enabledCollections: ['ep'],
+                }),
                 // AntDesignVueResolver(),
                 // HeadlessUiResolver(),
                 // ElementUiResolver()
             ],
+            
         })
+          
     ],
+      
 });
