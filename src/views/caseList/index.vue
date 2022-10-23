@@ -158,7 +158,7 @@ const listData = () => {
         height: 100px;
         object-fit: cover;
       }
-      ::v-deep .el-card__body {
+      :deep .el-card__body {
         display: flex;
       }
     }

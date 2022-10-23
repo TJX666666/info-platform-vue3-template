@@ -36,7 +36,7 @@
   .content-left {
     height: 100%;
     width: 500px;
-    ::v-deep p {
+    :deep p {
       font-size: 14px;
       font-family: "SimHei";
       color: $bg-color-grey;

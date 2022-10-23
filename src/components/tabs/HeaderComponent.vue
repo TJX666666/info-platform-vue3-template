@@ -15,8 +15,8 @@
       >
     </ul>
     <div class="login-btn">
-      <el-button>登录</el-button>
-      <el-button class="sign-in">注册</el-button>
+      <el-button @click="toSign">登录</el-button>
+      <!-- <el-button class="sign-in">注册</el-button> -->
     </div>
   </div>
 </template>
@@ -52,6 +52,11 @@ const checkItem = (_, index) => {
       break;
   }
   router.push({ name: pass });
+};
+
+//登录页跳转
+const toSign = () => {
+  router.push({ name: "login" });
 };
 </script>
 

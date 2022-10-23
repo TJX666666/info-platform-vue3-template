@@ -67,11 +67,11 @@ onMounted(() => {
 .carousel-box {
   height: calc(100vh - $header-height);
 
-  ::v-deep .el-carousel__container {
+  :deep .el-carousel__container {
     height: calc(100vh - $header-height);
   }
   .el-image {
-    ::v-deep img {
+    :deep img {
       width: 100vw;
       height: calc(100vh - $header-height);
     }
@@ -87,7 +87,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     box-sizing: border-box;
-    ::v-deep .el-card__body {
+    :deep .el-card__body {
       text-align: center;
     }
     .text {
