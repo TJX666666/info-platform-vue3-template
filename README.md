@@ -21,6 +21,7 @@
 - 常用工具库，复用的 uview 组件方法库
 - dayjs
 - 自动按需引入组件
+###拷贝项目: https://github.com/TJX666666/info-platform/generate
 
 #### 安装依赖
 
